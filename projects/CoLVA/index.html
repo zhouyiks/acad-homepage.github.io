@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="template.v2.js"></script>
+        <script src="contents_bar.js"></script>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://d3js.org/d3-collection.v1.min.js"></script>
+        <script src="https://rawgit.com/nstrayer/slid3r/master/dist/slid3r.js"></script>
+        <script src="cross_fade.js"></script>
+        <link rel="stylesheet" href="style.css">
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+    
+            
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>CoLVA</title>
+
+            
+            <style>
+                /* Styling for the table */
+                table, th, td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    padding: 10px;
+                    text-align: left;
+                    cursor: pointer;
+                }
+                .container {
+                    display: flex;
+                    align-items: start;
+                }
+
+                .table-container {
+                    margin-right: 10px;
+                }
+
+
+                /* Styling for the carousel */
+                .carousel-container {
+                    width: 100%;
+                    max-width: 600px;
+                    margin: auto;
+                    position: relative;
+                    overflow: hidden;
+                    align-items: center;
+                }
+                .carousel-slide {
+                    display: none;
+                    width: 100%;
+                    height: 400px;
+                    position: center;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .carousel-slide.active {
+                    display: flex;
+                }
+                .carousel-slide img {
+                    max-width: 100%;
+                    max-height: 400px;
+                    width: auto;
+                    height: auto;
+                    margin: 0%;
+                    transform: translateX(150px);
+                }
+                .carousel-controls {
+                    position: absolute;
+                    top: 50%;
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    transform: translateY(-50%);
+                }
+                .carousel-button {
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 24px;
+                }
+                .carousel-caption p {
+                    text-align: center;
+                    font-size: 16px;
+                    color: #333;
+                    margin-top: 10px; /* Adjust as needed */
+                }
+        
+                /* Additional styles can go here */
+            </style>
+
+    </head>
+    <body>
+        <div class="header-container"></div>
+            <div class="header-content">
+              <h1>Eyes Wide Shut? Exploring the Visual Shortcomings of Multimodal LLMs</h1>
+              <div class="button-container">
+                <a href="https://arxiv.org/abs/***" class="button">Paper</a>
+                <a href="https://github.com/zhouyiks/CoLVA" class="button">Code</a>
+              </div>
+            </div>
+            <!-- <div class="header-image">
+                <img src="images/teaser_head.png" alt="Teaser Image" class="teaser-image">
+            </div> -->
+        </div>
+    </body>
+    <d-article>
+        <div class="carousel-container">
+            <div class="carousel-slide active">
+                <img src="images/failure1.png" alt="Teaser Image 1">
+            </div>
+            <div class="carousel-slide active"></div>
+                <img src="images/failure2.png" alt="Teaser Image 2">
+            </div>
+            <div class="carousel-slide active"></div>
+                <img src="images/failure3.png" alt="Teaser Image 3">
+            </div>
+            <div class="carousel-slide active"></div>
+                <img src="images/failure4.png" alt="Teaser Image 4">
+            </div>
+            <div class="carousel-slide active"></div>
+                <img src="images/failure5.png" alt="Teaser Image 5">
+            </div>
+            <div class="carousel-slide active"></div>
+                <img src="images/failure6.png" alt="Teaser Image 6">
+            </div>
+            <div class="carousel-slide active"></div>
+                <img src="images/failure7.png" alt="Teaser Image 7">
+            </div>
+            <div class="carousel-slide active"></div>
+                <img src="images/failure8.png" alt="Teaser Image 8">
+            </div>
+
+            <!-- ... more slides ... -->
+
+            <div class="carousel-controls"></div>
+                <button class="carousel-button" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="carousel-button" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+            <div class="carousel-caption">
+                <p>Failure Instances of GPT-4o, Swipe to see more</p>
+            </div>
+        </div>
+
+        <script>
+            let slideIndex = 0;
+            showSlides(slideIndex);
+
+            function moveSlide(n) {
+                showSlides(slideIndex += n);
+            }
+
+            function showSlides(n) {
+                let i;
+                let slides = document.getElementsByClassName("carousel-slide");
+                if (n >= slides.length) { slideIndex = 0 }
+                if (n < 0) { slideIndex = slides.length - 1 }
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slides[slideIndex].style.display = "block";
+            }
+        </script>
+
+        <d-contents>
+            <nav>
+                <h4>Contents</h4>
+                <div><a href="#mmvm">Evaluating Visual Matching Capabilities of MLLMs</a></div>
+                <div><a href="#analysis">Analysis of Current MLLMs' Shortcomings on Visual Matching Ability</a></div>
+                <div><a href="colva">CoLVA Improves MLLMs' Visual Matching Ability</a></div>
+            </nav>
+        </d-contents>
+
+        <p>Recent advancements in multimodal models have demonstrated a strong alignment between vision and language, 
+        resulting in enhanced capabilities in visual perception, reasoning, and vision-language understanding. However, 
+        is the vision component sufficiently discriminative for visual matching in the context of multiple images? Our 
+        research indicates that the visual matching capabilities of current multimodal LLMs (MLLMs) still exhibit systematic
+        shortcomings, even with current strong MLLMs models, GPT-4o.</p>
+
+        <section id="mmvm">
+            <h2>Evaluating Visual Matching Capabilities of MLLMs</h2>
+            <p>To understand the visual matching incapilities of MLLMs, we firstly build a new and challenging benchmark on
+            instance-level correspondence across multiple images. Specifically, we collect 1,510 samples from 15 public datasets 
+            and internet video platforms. These samples encompass various scenes, such as indoor environments, urban settings, and 
+            card and billiards games. Each sample is carefully annotated with multi-image QA pairs by the three skilled annotators.
+            For the benchmark, we evaluate 36 state-of-the-art (SOTA) MLLM methods across eight aspects, including color, shape, posture,
+            size, textual or logo markers, and more.
+            <d-figure>
+                <figure>
+                    <img src="images/benchmark_00.png" alt="MMVM Benchmark">
+                    <figcaption>
+                        Fig 1. Visualization of MMVM Benchmark. Our MMVM Benchmark contains 1,510 manually annotated multi-image QA pairs, 
+                        8 matching patterns, and 2 types of object referring methods. We collect those evaluate samples from 15 
+                        open-source video datasets and various internet video platforms.
+                    </figcaption>
+                </figure>
+            </d-figure>
+            </p>
+            <p>
+                We have evaluated 36 SOTA MLLMs (e.g. InternVL2, Qwen2VL, LLaVA-OneVision, GeminiPro, GPT-4o) on the MMVM benchmark. 
+                However, none of the MLLMs can achive an overall accuracy exceeding 50%. 
+                <figure>
+                    <img src="images/benchmark_results.png", alt="MMVM Benchmark Results">
+                    <figcaption>
+                        Tab 1. MMVM Benchmark results. Accuracy is the metric, and the overall accuracy is computed across all 1,510 evaluation samples. 
+                        The accuracy for each of the eight match types is calculated separately on their respective samples.
+                    </figcaption>
+                </figure>
+            </p>
+        </section>
+
+        <section id="analysis">
+            <h2>Analysis of Current MLLMs' Shortcomings on Visual Matching Ability</h2>
+            <p>
+                None of these MLLMs can achieve an overall accuracy  exceeding 50% on MMVM benchmark. 
+                This phenomenon suggests significant deficiencies in cuurent MLLMs' performance on the visual matching task.
+                We argue that two main factors cause this phenomenon: 
+                <figure>
+                    <img src="images/attention_map_00.png", alt="Attention Map">
+                    <figcaption>
+                        Fig 2. The attention map of image pairs when the MLLMs generate responses. In all image pairs, 
+                        a query object is specified in the first image, while multiple candidate objects are specified 
+                        in the second image. The MLLMs select the candidate object in the second image that matches the query object.
+                    </figcaption>
+                </figure>
+                <ol>
+                    <li>
+                        <em>Although current MLLMs possess the necessary capabilities for visual matching, such as detailed descriptions of 
+                        objects' appearances and positions, they lack corresponding data to teach them to utilize these basic knowledge 
+                        and abilities for correct visual matching. </em>
+                        This hypothesis stems from two observations: Firstly, as shown in Fig.2, 
+                        we visualize the attention maps between multiple SOTA MLLMs' responses and images, which show that MLLMs correctly 
+                        focus on the query objects. Secondly, we find that these MLLMs, such as InternVL2-76B, can accurately identify 
+                        query objects' basic information, including category, color, position, shape, posture, and relationships with 
+                        other objects in the environment. However, it only achieved a score of 25 on the MMVM benchmark. These results 
+                        indicate that current MLLMs possess the necessary capabilities for visual matching, yet they cannot properly utilize 
+                        these abilities to perform visual matching successfully.
+                    </li>
+                    <li>
+                        <em>Current MLLMs rely on CLIP models to understand images and cannot comprehend fine-grained and discriminative visual 
+                        features, which are essential for visual matching since candidate objects often share extremely similar semantic information.</em>
+                        As shown in Fig.2, the attention maps demonstrate that MLLMs give almost equal attention to all candidate objects, 
+                        unable to distinguish the correct object.
+                    </li>
+                </ol>
+            </p>
+        </section>
+
+        <section id="colva">
+            <h2>CoLVA Improves MLLMs' Visual Matching Ability</h2>
+            <p>
+                To address the shortcomings, we propose a novel Object-level Contrastive Learning (OCL) strategy and introduce a fine-grained 
+                vision expert to provide the discriminative and fine-grained visual features, thereby improving the MLLM's visual matching 
+                performance.
+                <d-figure>
+                    <img src="images/model_00.png" alt="CoLVA Model"> 
+                    <figcaption>
+                        Fig 3. The overview of CoLVA. The left side shows how we use object-level contrastive loss to train the RADIO adapter to 
+                        simultaneously obtain discriminative features and align the RADIO feature space with MLLM's feature space. The right 
+                        side shows how we integrate the learned contrastive visual tokens into the MLLMs. We directly concatenate the learned 
+                        contrastive visual tokens with the origin visual tokens output from the MLLM's visual encoder and feed them into the 
+                        MLLM's LLM for answer generation.
+                    </figcaption>
+                </d-figure>
+            </p>
+
+            <h3 id="OCL">Object-Level Contrastive Learning</h3>
+            <p>
+                Inspired by the success of contrastive learning in visual representation, tracking and video segmentation, 
+                we introduce a novel object-level contrastive learning (OCL) strategy to help MLLM learn more discriminative 
+                features for better visual matching.
+
+                Firstly, we obtain the object-level representations using masked average pooling based on the image feature. 
+                Then, the object-level contrastive loss is conducted on the object-level representations:
+                <figure>
+                    <img src="images/ocl_loss.png" alt="OCL Loss">
+                </figure>
+            </p>
+
+            <h3 id="VE">Fine-grained Vision Expert</h3>
+            <p>
+                We incorporate an additional fine-grained vision expert, RADIO, into the MLLM to provide more powerful visual representations. 
+                RADIO is distilled from the SAM encoder, DINOv2, CLIP, and other vision foundation models, thus possessing comprehensive 
+                capabilities such as fine-grained visual features and good image-text alignment ability.
+                Due to the significant gaps between RADIO's and MLLM's feature spaces, we introduce an additional pre-training stage to 
+                align them, and OCL can be easily integrated into this process. As depicted on the left side of Fig. 3, we incorporate RADIO into the MLLM. 
+                OCL is used in the pre-training stage to simultaneously obtain discriminative features and align the RADIO feature space with MLLM's feature space.
+                For an input image pair, one image is fed into the MLLM's original visual encoder, while another is input into the RADIO. 
+                We then apply OCL on all objects' representations. 
+            </p>
+
+            <h3 id="Exp">Experiments</h3>
+            <p>
+                We integrate CoLVA with several base models (InternVL2-4B, Qwen2VL-2B, Qwen2VL-7B) and improve their visual matching capabilities significantly.
+                The best one, CoLVA-Qwen2VL-7B, achieves 51.06% overall accuracy on the MMVM benchmark, surpassing GPT-4o and baseline by 8.41% and 23.58% overall 
+                accuracy, respectively.
+                <figure>
+                    <img src="images/colva_results.png" alt="CoLVA Results">
+                </figure>
+            </p>
+            <p>
+                CoLVA has generalization capability across different MLLMs
+                <figure>
+                    <img src="images/more_base_model_results.png" alt="More MLLMs as Base Model">
+                </figure>
+            </p>
+            <p>
+                CoLVA can maintain the inherent general visual question answering capabilities of its base model.
+                <figure>
+                    <img src="images/generalVAQ.png" alt="generalVAQ">
+                </figure>
+            </p>
+        </section>
+    </d-article>
+
+    <d-appendix>
+        <h3>BibTeX</h3>
+
+    </d-appendix>
+
+
+
+</html>
