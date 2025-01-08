@@ -111,36 +111,36 @@
     </body>
     <d-article>
         <div class="carousel-container">
-            <div class="carousel-slide active">
+            <div class="carousel-slide active" style="display: block;">
                 <img src="images/failure1.png" alt="Teaser Image 1">
             </div>
-            <div class="carousel-slide active">
+            <div class="carousel-slide active" style="display: none;">
                 <img src="images/failure2.png" alt="Teaser Image 2">
             </div>
-            <div class="carousel-slide active">
+            <div class="carousel-slide active" style="display: none;">
                 <img src="images/failure3.png" alt="Teaser Image 3">
             </div>
-            <div class="carousel-slide active">
+            <div class="carousel-slide active" style="display: none;">
                 <img src="images/failure4.png" alt="Teaser Image 4">
             </div>
-            <div class="carousel-slide active">
+            <div class="carousel-slide active" style="display: none;">
                 <img src="images/failure5.png" alt="Teaser Image 5">
             </div>
-            <div class="carousel-slide active">
+            <div class="carousel-slide active" style="display: none;">
                 <img src="images/failure6.png" alt="Teaser Image 6">
             </div>
-            <div class="carousel-slide active">
+            <div class="carousel-slide active" style="display: none;">
                 <img src="images/failure7.png" alt="Teaser Image 7">
             </div>
-            <div class="carousel-slide active">
+            <div class="carousel-slide active" style="display: none;">
                 <img src="images/failure8.png" alt="Teaser Image 8">
             </div>
 
             <!-- ... more slides ... -->
 
             <div class="carousel-controls">
-                <button class="carousel-button" onclick="moveSlide(-1)">&#10094;</button>
-                <button class="carousel-button" onclick="moveSlide(1)">&#10095;</button>
+                <button class="carousel-button" onclick="moveSlide(-1)">❮</button>
+                <button class="carousel-button" onclick="moveSlide(1)">❯</button>
             </div>
             <div class="carousel-caption">
                 <p>Failure Instances of GPT-4o, Swipe to see more</p>
@@ -202,6 +202,14 @@
             </d-figure>
             </p>
             <p>
+                <figure>
+                    <img src="images/MMVM_more_cases_00.png" alt="More MMVM Cases">
+                    <figcaption>
+                        Fig 2. Challenging test cases of our MMVM benchmark, where each row shows cases of different match types.
+                    </figcaption>
+                </figure>
+            </p>
+            <p>
                 We have evaluated 36 SOTA MLLMs (e.g. InternVL2, Qwen2VL, LLaVA-OneVision, GeminiPro, GPT-4o) on the MMVM benchmark. 
                 However, none of the MLLMs can achive an overall accuracy exceeding 50%. 
                 <figure>
@@ -223,7 +231,7 @@
                 <figure>
                     <img src="images/attention_map_00.png", alt="Attention Map">
                     <figcaption>
-                        Fig 2. The attention map of image pairs when the MLLMs generate responses. In all image pairs, 
+                        Fig 3. The attention map of image pairs when the MLLMs generate responses. In all image pairs, 
                         a query object is specified in the first image, while multiple candidate objects are specified 
                         in the second image. The MLLMs select the candidate object in the second image that matches the query object.
                     </figcaption>
@@ -233,7 +241,7 @@
                         <em>Although current MLLMs possess the necessary capabilities for visual matching, such as detailed descriptions of 
                         objects' appearances and positions, they lack corresponding data to teach them to utilize these basic knowledge 
                         and abilities for correct visual matching. </em>
-                        This hypothesis stems from two observations: Firstly, as shown in Fig.2, 
+                        This hypothesis stems from two observations: Firstly, as shown in Fig.3, 
                         we visualize the attention maps between multiple SOTA MLLMs' responses and images, which show that MLLMs correctly 
                         focus on the query objects. Secondly, we find that these MLLMs, such as InternVL2-76B, can accurately identify 
                         query objects' basic information, including category, color, position, shape, posture, and relationships with 
@@ -244,7 +252,7 @@
                     <li>
                         <em>Current MLLMs rely on CLIP models to understand images and cannot comprehend fine-grained and discriminative visual 
                         features, which are essential for visual matching since candidate objects often share extremely similar semantic information.</em>
-                        As shown in Fig.2, the attention maps demonstrate that MLLMs give almost equal attention to all candidate objects, 
+                        As shown in Fig.3, the attention maps demonstrate that MLLMs give almost equal attention to all candidate objects, 
                         unable to distinguish the correct object.
                     </li>
                 </ol>
