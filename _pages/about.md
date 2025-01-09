@@ -43,6 +43,10 @@ Full Publications can be found in [Google Scholar](https://scholar.google.com/ci
      Tao Zhang, Xingye Tian, <strong>Yikang Zhou </strong>, Shunping Ji, Xuebo Wang, Yuan Zhang, Pengfei Wan, Zhongyuan Wang, Yu Wu,
       <strong>arxiv </strong> | <a href="https://github.com/zhang-tao-whu/DVIS_Plus">Code</a> </li>
 
+<li><a href="https://arxiv.org/abs/2501.04670">Improving Video Segmentation via Dynamic Anchor Queries</a>,  
+     <strong>Yikang Zhou* </strong>, Tao Zhang, Shilin Xu, Shihao Chen, Qianyu Zhou, Yunhai Tong, Shunping Ji, Jiangning Zhang, Xiangtai Li, Lu Qi,
+      <strong>arxiv </strong> | <a href="https://github.com/zhouyiks/CoLVA">Code</a> </li>
+
 # 🎖 Honors and Awards
 - *2023.08* Winner of the VIS Track of the 5th LSVOS challenge at ICCV 2023.
 
